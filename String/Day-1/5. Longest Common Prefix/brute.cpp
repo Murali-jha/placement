@@ -10,11 +10,11 @@ public:
         
         int i = 0;
         string ans = "";
-        while(1){
+        while(i<strs[0].size()){
             int j = 1;
             char target = strs[0][i];
             while(j<strs.size()){
-                if(strs[j].length()==i || strs[j-1].length()==i){
+                if(strs[j].length()==i){
                     return ans;
                 }
                 if(strs[j-1][i]!=strs[j][i]){
