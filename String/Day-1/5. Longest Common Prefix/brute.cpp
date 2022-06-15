@@ -12,11 +12,12 @@ public:
         string ans = "";
         while(i<strs[0].size()){
             int j = 1;
+            char target = strs[0][i];
             while(j<strs.size()){
                 if(strs[j].length()==i){
                     return ans;
                 }
-                if(strs[j-1][i]!=strs[j][i]){
+                if(strs[j][i]!=target){
                     return ans;
                 }
                 
