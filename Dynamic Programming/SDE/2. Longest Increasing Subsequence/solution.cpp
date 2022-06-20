@@ -5,7 +5,7 @@ public:
         vector<int> lis(n,1);
         for(int j=1;j<n;j++){
             for(int i=0;i<j;i++){
-                if(nums[j]>nums[i] && lis[j]<=lis[i]){
+                if(nums[j]>nums[i] && lis[j]<lis[i]+1){
                     lis[j] = lis[i]+1;
                 }
             }
