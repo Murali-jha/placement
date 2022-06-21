@@ -28,7 +28,7 @@ public:
         cuts.push_back(0);
         cuts.push_back(n);
         sort(cuts.begin(),cuts.end());
-        vector<vector<int>> t(n+1,vector<int>(n+1,-1));
+        vector<vector<int>> t(cuts.size()+1,vector<int>(cuts.size()+1,-1));
         return solve(cuts,1,cuts.size()-2,t);
     }
 };
