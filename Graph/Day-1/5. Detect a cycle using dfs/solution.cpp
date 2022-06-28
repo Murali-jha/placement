@@ -3,61 +3,60 @@
 using namespace std;
 
 class Solution {
-  private:
-    bool checkCycle(int node, vector < int > adj[], int vis[], int dfsVis[]) {
+
+  public:
+    bool checkForCycle(int node, int parent, vector < int > & vis, vector < int > adj[]) {
       vis[node] = 1;
-      dfsVis[node] = 1;
       for (auto it: adj[node]) {
         if (!vis[it]) {
-          if (checkCycle(it, adj, vis, dfsVis)) return true;
-        } else if (dfsVis[it]) {
+          if (checkForCycle(it, node, vis, adj))
+            return true;
+        } else if (it != parent)
           return true;
-        }
       }
-      dfsVis[node] = 0;
+
       return false;
     }
   public:
-    bool isCyclic(int N, vector < int > adj[]) {
-      int vis[N], dfsVis[N];
-      memset(vis, 0, sizeof vis);
-      memset(dfsVis, 0, sizeof dfsVis);
-
-      for (int i = 0; i < N; i++) {
+    bool isCycle(int V, vector < int > adj[]) {
+      vector < int > vis(V + 1, 0);
+      for (int i = 0; i < V; i++) {
         if (!vis[i]) {
-          // cout << i << endl; 
-          if (checkCycle(i, adj, vis, dfsVis)) {
-            return true;
-          }
+          if (checkForCycle(i, -1, vis, adj)) return true;
         }
       }
+
       return false;
     }
 };
 
-void addEdge(vector < int > adj[], int u, int v) {
-  adj[u].push_back(v);
-  adj[v].push_back(u);
-}
-
+// { Driver Code Starts.
 int main() {
 
-  int V = 6;
-
+  int V = 5;
+  int E = 5;
   vector < int > adj[V];
-  addEdge(adj, 0, 1);
-  addEdge(adj, 1, 2);
-  addEdge(adj, 1, 5);
-  addEdge(adj, 2, 3);
-  addEdge(adj, 3, 4);
-  addEdge(adj, 4, 0);
-  addEdge(adj, 4, 1);
+
+  adj[0].push_back(1);
+  adj[1].push_back(0);
+
+  adj[1].push_back(2);
+  adj[2].push_back(1);
+
+  adj[1].push_back(4);
+  adj[4].push_back(1);
+
+  adj[4].push_back(3);
+  adj[3].push_back(4);
+
+  adj[2].push_back(3);
+  adj[3].push_back(2);
 
   Solution obj;
-  if (obj.isCyclic(V, adj))
-    cout << "Cycle Detected" << "\n";
-  else
-    cout << "No Cycle Detected";
+  bool ans = obj.isCycle(V, adj);
+  if (ans) {
+    cout << "Cycle Detected";
+  } else cout << "No Cycle Detected";
 
   return 0;
 }
