@@ -1,0 +1,26 @@
+create table employee(
+id int,
+name varchar(10)
+
+
+);
+
+desc employee;
+
+Alter table employee add city varchar(20);
+
+
+Alter table employee drop column address;
+
+Alter table employee modify id varchar(10);
+
+
+Alter table employee rename column id to roll;
+
+Alter table employee rename to emp;
+
+Alter table emp rename column Roll to id;
+
+Alter table emp add primary key (id);
+
+desc emp;
